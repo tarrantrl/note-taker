@@ -3,6 +3,7 @@ const express = require('express');
 
 // require the routes
 const htmlRoutes = require('./routes/htmlRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 // set up the port variable
 const PORT = process.env.PORT || 3001;
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.static('public'));
 // set up the routes
 app.use('/', htmlRoutes);
+app.use('/api', apiRoutes)
 
 // set up server to listen on the specified port
 app.listen(PORT, () => {
