@@ -1,7 +1,7 @@
 // require router
 const router = require('express').Router();
 // require the validateNote function
-const {validateNote, createNewNote} = require('../../lib/notes');
+const {findById, validateNote, createNewNote, deleteNote} = require('../../lib/notes');
 // require the note data
 const notes = require('../../db/db.json');
 
@@ -12,8 +12,8 @@ router.get('/notes', (req, res) => {
 
 // set up the post request for the notes api
 router.post('/notes', (req, res) => {
-    // create an id based on the length of the current notes list
-    req.body.id = notes.length.toString();
+    // create an id based on the current date
+    req.body.id = Date.now();
     // check that the note submitted is valid
     if (!validateNote(req.body)){
         // if the note is not valid, send a 400 error to indicate user error
@@ -23,6 +23,13 @@ router.post('/notes', (req, res) => {
         const note = createNewNote(req.body, notes);
         res.json(note);
     }
+})
+
+// set up delete request
+router.delete('/notes/:id', (req, res) => {
+    // notes = notes.filter(note => note.id !== req.params.id);
+    filteredNotes = deleteNote(req.params.id, notes);
+    res.json(notes);
 })
 
 module.exports = router;
