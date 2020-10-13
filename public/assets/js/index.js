@@ -79,6 +79,7 @@ var handleNoteDelete = function(event) {
     getAndRenderNotes();
     renderActiveNote();
   });
+  console.log('delete in js/index.js');
 };
 
 // Sets the activeNote and displays it
@@ -127,6 +128,7 @@ var renderNoteList = function(notes) {
 
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function() {
+  console.log('get and render notes');
   return getNotes().then(function(data) {
     renderNoteList(data);
   });

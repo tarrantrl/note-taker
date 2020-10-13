@@ -3,7 +3,7 @@ const router = require('express').Router();
 // require the validateNote function
 const {findById, validateNote, createNewNote, deleteNote} = require('../../lib/notes');
 // require the note data
-const notes = require('../../db/db.json');
+let notes = require('../../db/db.json');
 
 // set up the get request for the notes api
 router.get('/notes', (req, res) => {
@@ -28,7 +28,8 @@ router.post('/notes', (req, res) => {
 // set up delete request
 router.delete('/notes/:id', (req, res) => {
     // notes = notes.filter(note => note.id !== req.params.id);
-    filteredNotes = deleteNote(req.params.id, notes);
+    console.log('routes/index.js');
+    notes = deleteNote(req.params.id, notes);
     res.json(notes);
 })
 
